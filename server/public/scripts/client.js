@@ -10,6 +10,11 @@ function readyNow() {
     $('#multiply').on('click', addMultiply);
     $('#divide').on('click', addDivide);
     $('#compute').on('click', calculateClient);
+
+    // click listener with function to empty inputs
+    $('#clearButton').on('click', function() {
+        $('#inputs').children('input').val('');
+    })
 }
 let op = '';
 
