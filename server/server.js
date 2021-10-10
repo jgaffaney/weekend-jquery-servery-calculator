@@ -35,6 +35,11 @@ app.get('/results', (req, res) => {
     res.send(resultsArray);
 })
 
+app.delete('/clear-history', (req, res) => {
+    resultsArray = [];
+    res.send(resultsArray);
+})
+
 function calculate(input) {
     switch (input.operator) {
         // add key value of result and calculation to the object based on operator

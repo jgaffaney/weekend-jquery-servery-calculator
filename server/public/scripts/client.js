@@ -10,6 +10,7 @@ function readyNow() {
     $('#multiply').on('click', addMultiply);
     $('#divide').on('click', addDivide);
     $('#compute').on('click', calculateClient);
+    $('#clearHistoryButton').on('click', clearHistory)
 
     // click listener with function to empty inputs
     $('#clearButton').on('click', function() {
@@ -82,3 +83,12 @@ function calculateClient() {
         })    
     }
 }
+
+// a function to delete all history on the server
+function clearHistory() {
+    $.ajax({
+        method: 'DELETE',
+        url: '/clear-history'
+    }).then(render())
+    }
+
