@@ -29,6 +29,12 @@ app.post('/calculate', (req, res) => {
     res.sendStatus(201); 
 })
 
+app.get('/results', (req, res) => {
+    console.log('this is GET on server');
+    
+    res.send(resultsArray);
+})
+
 function calculate(input) {
     switch (input.operator) {
         // add key value of result and calculation to the object based on operator
@@ -47,6 +53,8 @@ function calculate(input) {
         break;
     }
     // push the object to the results array
+    console.log('this is input from calculate ', input);
+    
     resultsArray.push(input)
 }
 
