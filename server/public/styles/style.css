@@ -12,3 +12,38 @@
     padding-right: 5px;
     min-width: 30px;
 }
+
+#calculatorInterface {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+    border: 2px solid black;
+    border-radius: 3px;
+}
+
+.calcButtons {
+    border: 1px solid black;
+    padding: 15px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5)
+}
+
+#display {
+    padding: 10px;
+    border-bottom: 2px solid black;
+    color: grey;
+    font-size: 30px;
+    text-align: right;
+}
+.calculatorButtons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+}
+
+.calcButtons {
+    grid-column: auto;
+}
