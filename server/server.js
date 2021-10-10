@@ -15,26 +15,38 @@ app.listen(PORT, () => {
 
 app.post('/calculate', (req, res) => {
     console.log('/calculate POST req.body ', req.body);
+    // convert inputs to numbers
+    let firstNumber = Number(req.body.firstNumber);
+    let secondNumber = Number(req.body.secondNumber);
+    //create new object with numbers as values
+    let result = {
+        firstNumber: firstNumber,
+        secondNumber: secondNumber,
+        operator: req.body.operator
+    }
+    calculate(result);
     
-    
+    res.sendStatus(201); 
 })
 
 function calculate(input) {
-    let result = 0;
     switch (input.operator) {
+        // add key value of result and calculation to the object based on operator
         case '+':
-            result = Number(input.firstNumber) + Number(input.secondNumber);
+            input.result = input.firstNumber + input.secondNumber;
         break;
         case '-':
-            result = Number(input.firstNumber) - Number(input.secondNumber);
+            input.result = input.firstNumber - input.secondNumber;
         break;
         case '*':
-            result = Number(input.firstNumber) * Number(input.secondNumber);
+            input.result = input.firstNumber * input.secondNumber;
+            
         break;
         case '/':
-            result = Number(input.firstNumber) / Number(input.secondNumber);
+            input.result = input.firstNumber / input.secondNumber;
         break;
     }
-console.log(result);
+    // push the object to the results array
+    resultsArray.push(input)
+}
 
-} 
