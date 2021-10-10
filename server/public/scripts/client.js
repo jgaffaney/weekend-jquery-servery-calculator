@@ -13,6 +13,10 @@ function readyNow() {
     $('#clearHistoryButton').on('click', clearHistory)
     $('#clearButton').on('click', clearInputs)
     $('#firstNumberIn').on('click', clearInputs);
+    $('.calculatorButtons').on('click', function() {
+        console.log(this.data);
+        
+    })
 
     render();
 }
