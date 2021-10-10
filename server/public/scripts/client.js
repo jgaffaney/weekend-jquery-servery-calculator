@@ -11,13 +11,15 @@ function readyNow() {
     $('#divide').on('click', addDivide);
     $('#compute').on('click', calculateClient);
     $('#clearHistoryButton').on('click', clearHistory)
-
-    // click listener with function to empty inputs
-    $('#clearButton').on('click', function() {
-        $('#inputs').children('input').val('');
-    })
+    $('#clearButton').on('click', clearInputs)
+    $('#firstNumberIn').on('click', clearInputs);
 
     render();
+}
+// a function to clear inputs
+function clearInputs() {
+    $('#inputs').children('input').val('');
+    $('#resultDisplay').text('')
 }
 
 // a function to record the operator
@@ -66,6 +68,7 @@ function render() {
                     <td>=</td>
                     <td class="calcResult">${calc.result}</td>
             `)
+            $('#resultDisplay').text(calc.result)
         }
     })
     // reset op to empty string for verification of inputs
@@ -88,7 +91,7 @@ function calculateClient() {
         }).then(function(response) {
             console.log('/POST response ', response);
             render();
-            $('#inputs').children('input').val(''); 
+            // $('#inputs').children('input').val(''); 
         }).catch(function(response) {
             console.log('POST failed response ', response);
             
