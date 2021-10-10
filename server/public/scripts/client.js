@@ -1,8 +1,8 @@
 $(readyNow);
 
 function readyNow() {
-
-    // render();
+    //declare global variables
+    let op = '';
 
     // click listeners
     $('#addition').on('click', addAddition);
@@ -15,10 +15,11 @@ function readyNow() {
     $('#clearButton').on('click', function() {
         $('#inputs').children('input').val('');
     })
-}
-let op = '';
 
-// a function to add addition attribute to equals
+    render();
+}
+
+// a function to record the operator
 function addAddition() {
     console.log('add clicked');
     op='+';
@@ -58,24 +59,26 @@ function render() {
             `)
         }
     })
+    op = '';
 }
 // a function to send inputs and operator to server for processing
 function calculateClient() {
-    console.log(op);
-    
-    
-    $.ajax({
-        method: 'POST',
-        url: '/calculate',
-        data: {
-            firstNumber: $('#firstNumberIn').val(),
-            secondNumber: $('#secondNumberIn').val(),
-            operator: op
-        }
-    }).then(function(response) {
-        console.log('/POST response ', response);
-        render();
-        $('#inputs').children('input').val('');
-        
-    })
+    // console.log(op);
+    if($('#firstNumberIn').val() === '' || $('#secondNumberIn').val() === '' || op === '') {
+        alert('Must fill out all values including a mathematical operator!')
+    } else {
+        $.ajax({
+            method: 'POST',
+            url: '/calculate',
+            data: {
+                firstNumber: $('#firstNumberIn').val(),
+                secondNumber: $('#secondNumberIn').val(),
+                operator: op
+            }
+        }).then(function(response) {
+            console.log('/POST response ', response);
+            render();
+            $('#inputs').children('input').val(''); 
+        })    
+    }
 }
