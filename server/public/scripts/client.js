@@ -21,22 +21,30 @@ function readyNow() {
 }
 
 // a function to record the operator
-function addAddition() {
+function addAddition(event) {
+    event.preventDefault();
+    $('#secondNumberIn').focus();
     console.log('add clicked');
     op='+';
 }
 
-function addSubtract() {
+function addSubtract(event) {
+    event.preventDefault();
+    $('#secondNumberIn').focus();
     console.log('subtract clicked');
     op = '-';
 }
 
-function addMultiply() {
-    console.log('multiply clicked');
+function addMultiply(event) {
+    event.preventDefault();
+    $('#secondNumberIn').focus();
+console.log('multiply clicked');
     op = '*';
 }
-function addDivide() {
-    console.log('Divide clicked');
+function addDivide(event) {
+    event.preventDefault();
+    $('#secondNumberIn').focus();
+console.log('Divide clicked');
     op = '/';
 }
 
@@ -56,10 +64,11 @@ function render() {
                     <td>${calc.operator}</td>
                     <td>${calc.secondNumber}</td>
                     <td>=</td>
-                    <td>${calc.result}</td>
+                    <td class="calcResult">${calc.result}</td>
             `)
         }
     })
+    // reset op to empty string for verification of inputs
     op = '';
 }
 // a function to send inputs and operator to server for processing
@@ -80,6 +89,9 @@ function calculateClient() {
             console.log('/POST response ', response);
             render();
             $('#inputs').children('input').val(''); 
+        }).catch(function(response) {
+            console.log('POST failed response ', response);
+            
         })    
     }
 }
@@ -88,7 +100,9 @@ function calculateClient() {
 function clearHistory() {
     $.ajax({
         method: 'DELETE',
-        url: '/clear-history'
-    }).then(render())
-    }
-
+        url: '/clear-history',
+        success: function(response) {
+            render();
+                }
+        }
+    )}
